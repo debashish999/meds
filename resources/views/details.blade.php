@@ -17,8 +17,8 @@
         @csrf
         <input type="hidden" name="product_id" value={{ $product->id }}>
         <button class="btn btn-primary">Add to Cart</button>
-        </form>
-        <button class="btn btn-success">Buy Now</button>
+        </form><a href="/buynow/{{ $product->id }}">
+        <button class="btn btn-success" >Buy Now</button></a>
         </div>
 
        

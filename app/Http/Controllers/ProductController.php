@@ -119,5 +119,38 @@ class ProductController extends Controller
         return view('myorders',['orders' => $orders]);
 
     }
+    public function buyNow($id){
+        if(session()->has('user')){
+        
+        $data =  Product::find($id);
+       
+
+        return view('buynowplace',['product' => $data]);
+
+        }
+
+        else{
+            return redirect('logview');
+        }
+
+
+
+    }
+    public function buyOrderNow(Request $req){
+
+            $userid = Session::get('user')['id'];
+
+            $order = new Order();
+            $order->product_id = $req->product_id;
+            $order->user_id = $userid;
+            $order->status = "pending";
+            $order->payment_method= $req->payment;
+            $order->payment_status="pending";
+            $order->address= $req->address;
+            $order->save();
+
+            return redirect('/');
+
+    }
 
 }
